@@ -3,7 +3,7 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="utf-8">
-		<title>Responsive Login Page</title>
+		<title>login</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
 		<link rel="stylesheet" href="../css/Login.css">
@@ -29,11 +29,11 @@
 			<!--login form start-->
 			<form class="login-form" action="connect.php" method="POST">
 				<i class="fas fa-user-circle"></i>
-				<input class="user-input" type="text" name="username" placeholder="Username" required>
-				<input class="user-input" type="password" name="password" placeholder="Password" required>
+				<input class="user-input" type="text" name="username" placeholder="Username" >
+				<input class="user-input" type="password" name="password" placeholder="Password" >
 				<div class="options-01">
 					<label class="remember-me"><input type="checkbox" name="">Remember me</label>
-					<a href="#">Forgot your password?</a>
+					<a href="forgot_password.php">Forgot your password?</a>
 				</div>
 				<input class="btn-submit" type="submit" name="btn-login" value="LOGIN" >
 				<div class="options-02">

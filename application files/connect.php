@@ -1,7 +1,6 @@
 <?php
 
-$conn = mysqli_connect('localhost','root','','e-learning database');
-
+include('config.php');
 if($conn->connect_errno > 0)
 {
 		die("Unable to connection to database[".$conn->connect_error."]");
@@ -19,6 +18,23 @@ if($conn->connect_errno > 0)
 							$data = stripslashes($data);
 							$data = htmlspecialchars($data);
 							return $data;
+
+					}
+					$length = $_POST["password"];
+					function strlength($str){
+						$length = strlength($str);
+
+							if($length > 15){
+
+								return "Password should be less than 15 characters";
+
+							}elseif ($length < 5 && $length >= 1) {
+
+									return "Password should be greater than 3 charcaters";
+
+							}
+
+							return;
 
 					}
 
@@ -62,23 +78,6 @@ if($conn->connect_errno > 0)
 														$boolean = true;
 													}
 
-													function strlength($str){
-														$length = $_POST["password"];
-
-															if($length > 15){
-
-																return "Password should be less than 15 characters";
-
-															}elseif ($length < 5 && $length >= 1) {
-
-																	return "Password should be greater than 3 charcaters";
-
-															}
-
-															return;
-
-													}
-
 													if (isset($_POST["check1"])) {
 
 															$boolean = true;
@@ -93,13 +92,13 @@ if($conn->connect_errno > 0)
 								}
 
 
-                  $sql = "SELECT * FROM testdb WHERE email_address = '".$_POST["email_address"]."'";
-									$username = "SELECT * FROM testdb WHERE username = '".$_POST["username"]."'";
+                  $sql = "SELECT * FROM users WHERE email_address = '".$_POST["email_address"]."'";
+				  $username = "SELECT * FROM users WHERE username = '".$_POST["username"]."'";
 
 									$result = $conn->query($sql);
 									$user_result = $conn->query($username);
 
-									    if ($result->num_rows > 0) {
+					 if ($result->num_rows > 0) {
 
                         die("Sorry, your e-mail already exists in our database!");
 
@@ -107,14 +106,14 @@ if($conn->connect_errno > 0)
 
                       	die("Someone under that username already exists in our database!");
 
-											}else{
+					 }else{
 
-												  $password = md5('password');
-                          $sql = "INSERT INTO testdb(username,email_address,password) VALUES('".$_POST["username"]."','".$_POST["email_address"]."','$password')";
+								 $password = md5('password');
+                          $sql = "INSERT INTO users(username,email_address,password) VALUES('".$_POST["username"]."','".$_POST["email_address"]."','$password')";
 
                             if ($conn->query($sql) === TRUE) {
 
-                                header('location: login.php');
+                               // header('location: login.php');
 															  echo"<script>alert('You have sucessfully registered...!');</script>";
                             }
                             else {
@@ -124,47 +123,50 @@ if($conn->connect_errno > 0)
                           }
 
             }
-												  if (isset($_POST['btn-login'])) {
-																		 $username = $_POST["username"];
-																		 $password = $_POST["password"];
 
-																		 if(trim($username)!= "" and trim($password)!= "")
-																		 {
-
-																					     //Sanitizes whatever is entered
-																					     $username=stripcslashes($username);
-																					     $password=stripcslashes($password);
-																					     $username=strip_tags($_POST["username"]);
-																					     $password=strip_tags($_POST["password"]);
-
-																					     $username= mysqli_real_escape_string($conn,$username);
-																					     $password= mysqli_real_escape_string($conn,$password);
-
-																					     //SQL Query
-																					     $query = mysqli_query($conn,"SELECT * FROM testdb WHERE username ='$username' AND password ='$password'");
-																					     //apply mysqli
-																					     $numrows= mysqli_num_rows($query);
-
-																					     if($numrows >0)
-																					     {
-
-																					          //session username
-																					         $_SESSION["username"]= $username;
-
-																					              echo "<script>alert('Login successful');</script>";
-																					              header('location: admin_dash.php');
-
-																					        }else
-																					        {
-
-																					              echo "Failed to login! Check if your password and email_address are valid";
-
-																					        }
-
-																					   }
-
-																					 }
 
 						  $conn->close();
 
-      }
+      }elseif (isset($_POST['btn-login'])) {
+		$username = $_POST["username"];
+		$password = $_POST["password"];
+
+		if(trim($username)!= "" and trim($password)!= "")
+		{
+
+						//Sanitizes whatever is entered
+						$username=stripcslashes($username);
+						$password=stripcslashes($password);
+						$username=strip_tags($_POST["username"]);
+						$password=strip_tags($_POST["password"]);
+
+						$username= mysqli_real_escape_string($conn,$username);
+						$password= mysqli_real_escape_string($conn,$password);
+
+						//SQL Query
+						$password = md5('password');
+						$query = mysqli_query($conn,"SELECT * FROM users WHERE username ='$username' AND password ='$password'");
+						//apply mysqli
+						$numrows= mysqli_num_rows($query);
+
+						if($numrows >0)
+						{
+
+							 //session username
+							$_SESSION["username"]= $username;
+
+								 header('location: admin_dash.php');
+								 echo "<script>alert('Login successful');</script>";
+
+						   }else
+						   {
+
+								 echo "Failed to login! Check if your password and username are valid";
+
+						   }
+
+					  }
+
+					  $conn->close();
+
+					}
