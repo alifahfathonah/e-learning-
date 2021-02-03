@@ -155,7 +155,7 @@ if($conn->connect_errno > 0)
 							 //session username
 							$_SESSION["username"]= $username;
 
-								 header('location: admin_dash.php');
+								 header('location: ../student-dashboard/dashboard.php');
 								 echo "<script>alert('Login successful');</script>";
 
 						   }else

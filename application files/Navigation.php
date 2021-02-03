@@ -40,7 +40,7 @@
 			
 <div style="margin-top:70px">			
 <p style="margin-left: 40%;" >
-                    <video  class = "intro" src="../videos/production ID-4494802.mp4" width="320" height="240" controls>
+                    <video  class = "intro" src="../student-dashboard/videos/mov_bbb.mp4" width="320" height="240" controls>
                       Video not supported
                     </video></p></div>
 </div>

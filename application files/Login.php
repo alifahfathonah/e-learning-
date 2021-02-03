@@ -33,7 +33,7 @@
 				<input class="user-input" type="password" name="password" placeholder="Password" >
 				<div class="options-01">
 					<label class="remember-me"><input type="checkbox" name="">Remember me</label>
-					<a href="forgot_password.php">Forgot your password?</a>
+					<a href="reset_password.php">Forgot your password?</a>
 				</div>
 				<input class="btn-submit" type="submit" name="btn-login" value="LOGIN" >
 				<div class="options-02">
