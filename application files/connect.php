@@ -20,7 +20,7 @@ if($conn->connect_errno > 0)
 							return $data;
 
 					}
-					$length = $_POST["password"];
+					$length = $_POST["user_pass"];
 					function strlength($str){
 						$length = strlength($str);
 
@@ -65,7 +65,7 @@ if($conn->connect_errno > 0)
 													}
 
 
-													if (empty($_POST["password"])) {
+													if (empty($_POST["user_pass"])) {
 															$gerr = "Password is required...!";
 															$boolean = false;
 
@@ -74,7 +74,7 @@ if($conn->connect_errno > 0)
 															$boolean = true;
 
 													}else {
-														$password = validate_inputs($_POST["password"]);
+														$password = validate_inputs($_POST["user_pass"]);
 														$boolean = true;
 													}
 
@@ -108,8 +108,8 @@ if($conn->connect_errno > 0)
 
 					 }else{
 
-								 $password = md5('password');
-                          $sql = "INSERT INTO users(username,email_address,password) VALUES('".$_POST["username"]."','".$_POST["email_address"]."','$password')";
+								 $password = md5('user_pass');
+                          $sql = "INSERT INTO users(username,email_address,user_pass) VALUES('".$_POST["username"]."','".$_POST["email_address"]."','$password')";
 
                             if ($conn->query($sql) === TRUE) {
 
@@ -129,7 +129,7 @@ if($conn->connect_errno > 0)
 
       }elseif (isset($_POST['btn-login'])) {
 		$username = $_POST["username"];
-		$password = $_POST["password"];
+		$password = $_POST["user_pass"];
 
 		if(trim($username)!= "" and trim($password)!= "")
 		{
@@ -138,14 +138,14 @@ if($conn->connect_errno > 0)
 						$username=stripcslashes($username);
 						$password=stripcslashes($password);
 						$username=strip_tags($_POST["username"]);
-						$password=strip_tags($_POST["password"]);
+						$password=strip_tags($_POST["user_pass"]);
 
 						$username= mysqli_real_escape_string($conn,$username);
 						$password= mysqli_real_escape_string($conn,$password);
 
 						//SQL Query
-						$password = md5('password');
-						$query = mysqli_query($conn,"SELECT * FROM users WHERE username ='$username' AND password ='$password'");
+						$password = md5('user_pass');
+						$query = mysqli_query($conn,"SELECT * FROM users WHERE username ='$username' and user_pass ='$password'");
 						//apply mysqli
 						$numrows= mysqli_num_rows($query);
 
@@ -154,8 +154,8 @@ if($conn->connect_errno > 0)
 
 							 //session username
 							$_SESSION["username"]= $username;
-
-								 header('location: ../student-dashboard/dashboard.php');
+							$_SESSION["user_pass"]= $password;
+//								 header('location: admin_dash.php');
 								 echo "<script>alert('Login successful');</script>";
 
 						   }else

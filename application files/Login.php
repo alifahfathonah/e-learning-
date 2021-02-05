@@ -18,7 +18,7 @@
 
 				<input class="user-input" type="text" name="username" placeholder="Username" required pattern"^[A-Za-z0-9]+">
 				<input class="user-input" type="email" name="email_address" placeholder="Email Address" required pattern"^[A-Za-z0-9]+">
-				<input class="user-input" type="password" name="password" placeholder="Password" required pattern"^[A-Za-z0-9]+">
+				<input class="user-input" type="password" name="user_pass" placeholder="Password" required pattern"^[A-Za-z0-9]+">
 				<input class="btn-submit" type="submit" name="btn-submit" value="SIGN UP">
 				<div class="options-02">
 					<p>Already Registered? <a href="#">Sign In</a></p>
@@ -29,8 +29,8 @@
 			<!--login form start-->
 			<form class="login-form" action="connect.php" method="POST">
 				<i class="fas fa-user-circle"></i>
-				<input class="user-input" type="text" name="username" placeholder="Username" >
-				<input class="user-input" type="password" name="password" placeholder="Password" >
+				<input class="user-input" type="text" name="username" placeholder="Username" required >
+				<input class="user-input" type="password" name="user_pass" placeholder="Password" required>
 				<div class="options-01">
 					<label class="remember-me"><input type="checkbox" name="">Remember me</label>
 					<a href="reset_password.php">Forgot your password?</a>
