@@ -20,9 +20,9 @@
 
                    if (isset($_POST["reset-request-submit"])) {
                         
-                        echo '<p class = "reset_password.php?success"> Check your email</p>';
+                    echo "You seeing flames here";    
 
-                    }else{ echo "You seeing flames here";}
+                    }else{  echo '<p class = "reset_password.php?success"> Check your email</p>';}
     ?>
       
 <?php
